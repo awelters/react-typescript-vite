@@ -13,14 +13,18 @@ export default ({ mode }) => {
       targets: ['defaults', 'not IE 11'],
   })]
 
-  if( process.env.NODE_ENV === 'development') {
+  // do development specific tasks
+  if( process.env.NODE_ENV === 'development' ) {
     console.log('App title', process.env.VITE_APP_TITLE)
-    plugins.push(basicSsl())
+
+    // only use the basic ssl plugin if using the right script
+    if( process.env.npm_lifecycle_event === 'dev-https' ) {
+      plugins.push(basicSsl())
+    }
   }
 
   // https://vitejs.dev/config/
   return defineConfig({
-    // To access env vars here use process.env.TEST_VAR
-    plugins: plugins,
+    plugins: plugins
   });
 }
