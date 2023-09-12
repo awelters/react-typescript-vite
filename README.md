@@ -1,4 +1,4 @@
-# React + TypeScript + Vite + useState + useReducer
+# Vite  + React + Redux Toolkit + TypeScript
 
 This template provides a setup to get React working in Vite with HMR, enables type aware lint rules and other recommendations for developing a production application, legacy plugin support for older browsers, env variable support in node when building the application, and https support for the application when building locally.
 
