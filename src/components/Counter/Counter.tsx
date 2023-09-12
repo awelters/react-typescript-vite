@@ -2,14 +2,12 @@ import { useReducer, FunctionComponent } from 'react'
 
 // An enum with all the types of actions to use in our reducer
 enum CountActionKind {
-  INCREASE = 'INCREASE',
-  DECREASE = 'DECREASE',
+  INCREMENT = 'INCREMENT',
 }
 
 // An interface for our actions
 interface CountAction {
   type: CountActionKind;
-  payload: number;
 }
 
 // An interface for our state
@@ -19,17 +17,12 @@ interface CountState {
 
 // Our reducer function that uses a switch statement to handle our actions
 function counterReducer(state: CountState, action: CountAction): CountState {
-  const { type, payload } = action;
+  const { type } = action;
   switch (type) {
-    case CountActionKind.INCREASE:
+    case CountActionKind.INCREMENT:
       return {
         ...state,
-        count: state.count + payload,
-      };
-    case CountActionKind.DECREASE:
-      return {
-        ...state,
-        count: state.count - payload,
+        count: state.count + 1,
       };
     default:
       return state;
@@ -41,14 +34,7 @@ const Counter: FunctionComponent = () => {
   const initialCounterState = { count: 0 };
   const [state, dispatch] = useReducer(counterReducer, initialCounterState);
   return (
-    <>
-      <hr/>
-      Component Count with useReducer is {state.count}
-      <p>
-        <button onClick={() => { dispatch({ type: CountActionKind.DECREASE, payload: 1 }) } }>Decrement</button>
-        <button onClick={() => { dispatch({ type: CountActionKind.INCREASE, payload: 1 }) } }>Increment</button>
-      </p>
-    </>
+    <button onClick={() => { dispatch({ type: CountActionKind.INCREMENT }) } }>Component Count with useReducer is {state.count}</button>
   );
 };
 
